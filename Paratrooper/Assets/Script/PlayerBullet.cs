@@ -5,7 +5,7 @@ public class PlayerBullet : MonoBehaviour
 {
     public GameObject playerBullet;
     public Realtimeangle realtimeangle;
-    public float newAngle;
+  [HideInInspector]  public float newAngle;
 
     public static PlayerBullet instance;
     private int clickCount;
@@ -42,7 +42,7 @@ public class PlayerBullet : MonoBehaviour
                     yield return new WaitForSeconds(intervalBetweenBullets);
                 }
 
-                Debug.Log("Current angle on click: " + newAngle.ToString());
+              //  Debug.Log("Current angle on click: " + newAngle.ToString());
             }
             yield return null; 
         }
