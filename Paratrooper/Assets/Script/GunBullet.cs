@@ -3,33 +3,20 @@ using UnityEngine;
 public class GunBullet : MonoBehaviour
 {
     public float speed;
-    private GunMovement gunMovement;
-   
+    private float bulletAngle; 
 
     void Start()
     {
-      
-        gunMovement = GetComponent<GunMovement>();
-        if (gunMovement == null)
-        {
-            Debug.LogError("PlayerBullet component not found!");
-        }
+        bulletAngle = PlayerBullet.instance.newAngle; 
     }
 
     void Update()
     {
-       
-
         MoveBullet();
     }
 
-   
-
     void MoveBullet()
     {
-        if (gunMovement != null)
-        {
-          //  transform.Translate(gunMovement.gun.transform.eulerAngles.z * speed * Time.deltaTime, gunMovement.gun.transform.eulerAngles.z * speed * Time.deltaTime, 0);
-        }
+        transform.Translate(Quaternion.Euler(0, 0, bulletAngle) * Vector2.up * Time.deltaTime * speed);
     }
 }

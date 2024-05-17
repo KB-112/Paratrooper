@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public Button[] menuButton ;
     public GameObject[] menuObj;
+    public int soldierland;
     private void Awake()
     {
         if (gameManager == null)
@@ -16,4 +17,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    
 }

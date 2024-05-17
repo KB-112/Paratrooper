@@ -1,35 +1,50 @@
-
+using System.Collections;
 using UnityEngine;
-
 
 public class PlayerBullet : MonoBehaviour
 {
     public GameObject playerBullet;
     public Realtimeangle realtimeangle;
     public float newAngle;
+
+    public static PlayerBullet instance;
+    private int clickCount;
+    public float intervalBetweenBullets;
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void Start()
     {
         realtimeangle = GetComponent<Realtimeangle>();
-        
+        StartCoroutine(ClickCounter());
     }
 
-
-    void Update()
+    IEnumerator ClickCounter()
     {
-        if (Input.GetMouseButtonDown(0))
+        while (true)
         {
-            Vector2 pos = new Vector2(0, -1);
-            playerBullet.transform.position = pos;
-            Instantiate(playerBullet, playerBullet.transform.position, Quaternion.identity);
+            if (Input.GetMouseButtonDown(0))
+            {
+                newAngle = realtimeangle.realtimeangle();
+                Vector3 distantPosition = playerBullet.transform.position + Quaternion.Euler(0, 0, newAngle) * Vector2.up;
 
-            Debug.Log("Current angle on click" + realtimeangle.realtimeangle().ToString());
-            newAngle = realtimeangle.realtimeangle();
-        }
-        if (playerBullet != null)
-        {
-            playerBullet.transform.Translate(10, 10, 0);
+                clickCount++;
+
+                if (clickCount <= 3)
+                {
+                    Instantiate(playerBullet, distantPosition, Quaternion.identity);
+                }
+                else 
+                {
+                    clickCount = 0;
+                    yield return new WaitForSeconds(intervalBetweenBullets);
+                }
+
+                Debug.Log("Current angle on click: " + newAngle.ToString());
+            }
+            yield return null; 
         }
     }
-
-   
 }
