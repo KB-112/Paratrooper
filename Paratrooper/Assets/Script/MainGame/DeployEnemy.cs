@@ -6,7 +6,7 @@ using UnityEngine;
 public class DeployEnemy : MonoBehaviour
 {
     public List<GameObject> enemy;
-    public GameObject soldierEnemy;
+   
     public GameObject helicopterEnemy;
     float[] helicopterDeployPosition = new float[4]; // Corrected size to 4
     int randPos = 0;
@@ -19,23 +19,11 @@ public class DeployEnemy : MonoBehaviour
 
     private void Update()
     {
-        Deployment();
+        
       
     }
 
-    void Deployment()
-    {
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Vector2 pos = new Vector2(Random.Range(-5, 5), transform.position.y);
-            GameObject obj = Instantiate(soldierEnemy, pos, Quaternion.identity);
-            enemy.Add(obj);
-        }
-        if (enemy.Count == 4 && enemy.Any(enemyInstance => enemyInstance.transform.position.x < 0))
-        {
-            Debug.Log("Time to attack");
-        }
-    }
+   
 
     IEnumerator DeployHelicopter()
     {
@@ -43,7 +31,7 @@ public class DeployEnemy : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             InitHelicopterDeploy();
-            GameObject obj = Instantiate(helicopterEnemy, pos, Quaternion.identity);
+           Instantiate(helicopterEnemy, pos, Quaternion.identity);
 
 
             yield return new WaitForSeconds(1f);

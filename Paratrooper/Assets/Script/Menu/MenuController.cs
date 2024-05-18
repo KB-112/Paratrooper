@@ -14,12 +14,15 @@ public class MenuController : MonoBehaviour
 
     /// <summary>
     ///Menu Text
-    /// Button 0 : Paratrooper
-    /// Button 1 : Paratrooper
-    /// Button 2 : Start
-    /// Button 3 : Quit
-    /// Button 4 : How To Play
-    /// Button 5 : Back
+    /// Text 0 : Paratrooper
+    /// Text 1 : Paratrooper Text
+    ///Text 2 : Start
+    /// Text 3 : Quit
+    /// Text 4 : How To Play
+    /// Text 5 : Instruction
+    /// Text 6 : Back Text
+    /// Text 7 : Current Score
+    /// Text 8 : High score
     /// </summary>
 
     void Start()
@@ -58,6 +61,10 @@ public class MenuController : MonoBehaviour
             GameManager.gameManager.menuButton[i].interactable = true;
 
         }
+        for (int i = 0; i < GameManager.gameManager.mainGameObject.Count; i++)
+        {
+            GameManager.gameManager.mainGameObject[i].SetActive(false);
+        }
     }
     private void Quit()
     {
@@ -65,23 +72,31 @@ public class MenuController : MonoBehaviour
     }
     private void StartGame()
     {
-        for (int i = 0; i < GameManager.gameManager.menuButton.Length-1; i++)
+        // Disable menu buttons
+        for (int i = 0; i < GameManager.gameManager.menuButton.Length - 1; i++)
         {
             GameManager.gameManager.menuButton[i].interactable = false;
-
         }
 
+        // Set menu text alpha
         for (int i = 0; i < 6; i++)
         {
-            GameManager.gameManager.menuText[i].alpha = 0 ;
+            GameManager.gameManager.menuText[i].alpha = 0;
 
-
-            if (GameManager.gameManager.menuText[i].alpha == 0 )
+            if (GameManager.gameManager.menuText[i].alpha == 0)
             {
-               
-                GameManager.gameManager.menuText[i + 1].alpha = 1 ;
-
+                GameManager.gameManager.menuText[i + 1].alpha = 1;
             }
         }
+
+        // Disable back button
+        GameManager.gameManager.menuButton[3].interactable = false;
+
+        // Activate main game objects
+        for (int i = 0; i < GameManager.gameManager.mainGameObject.Count; i++)
+        {
+            GameManager.gameManager.mainGameObject[i].SetActive(true);
+        }
     }
+
 }

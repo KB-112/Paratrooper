@@ -10,6 +10,8 @@ public class PlayerBullet : MonoBehaviour
     public static PlayerBullet instance;
     private int clickCount;
     public float intervalBetweenBullets;
+
+    public AudioSource shootsound;
     private void Awake()
     {
         instance = this;
@@ -33,10 +35,11 @@ public class PlayerBullet : MonoBehaviour
                 Vector3 distantPosition = playerBullet.transform.position + Quaternion.Euler(0, 0, newAngle) * Vector2.up;
 
                 clickCount++;
-
+                shootsound.Play();
                 if (clickCount <= 3)
                 {
                     Instantiate(playerBullet, distantPosition, Quaternion.identity);
+                    
                 }
                 else 
                 {
