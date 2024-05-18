@@ -19,12 +19,14 @@ public class PlayerBullet : MonoBehaviour
     {
         realtimeangle = GetComponent<Realtimeangle>();
         StartCoroutine(ClickCounter());
+       
     }
-
+   
     IEnumerator ClickCounter()
     {
         while (true)
         {
+           
             if (Input.GetMouseButtonDown(0))
             {
                 newAngle = realtimeangle.realtimeangle();

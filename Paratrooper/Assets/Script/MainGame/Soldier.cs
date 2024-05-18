@@ -30,7 +30,7 @@ public class Soldier : MonoBehaviour
         }
         else
         {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            transform.Translate(Vector3.down * speed * Time.deltaTime);
         }
     }
 }

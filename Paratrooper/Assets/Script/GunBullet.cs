@@ -13,6 +13,10 @@ public class GunBullet : MonoBehaviour
     void Update()
     {
         MoveBullet();
+        if (transform.position.y > 5.04f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void MoveBullet()
