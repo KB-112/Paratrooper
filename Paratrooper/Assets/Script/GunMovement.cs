@@ -49,7 +49,7 @@ public class GunMovement : MonoBehaviour,Realtimeangle
        
                
         gun.transform.rotation = Quaternion.Slerp(gun.transform.rotation, Quaternion.Euler(newGunzDirection), slerpRate * Time.deltaTime);
-        currentAngleText.text = newGunzDirection.z.ToString() + "°";
+     //   currentAngleText.text = newGunzDirection.z.ToString() + "°";
                 //0176 for degree (alt + numeric pad )
             
       

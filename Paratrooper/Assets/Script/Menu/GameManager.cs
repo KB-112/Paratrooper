@@ -5,15 +5,30 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager; 
-    public TextMeshProUGUI[] menuText;
 
+    // Menu and Main Game [Flag based operation]
+
+    //[Main Menu]
+    public TextMeshProUGUI[] menuText;
     public Button[] menuButton ;
-    public GameObject[] menuObj;
+
+    //[Next scene - Main Gameplay]
+    public List<TextMeshProUGUI> mainGameText;
+    public List<SpriteRenderer> mainGameSprite;
+
+    //[Next scene -  Instruction of The Game]
+    public TextMeshProUGUI instruction;
+    public GameObject backButton;
+    public Button backBtn;
+    //***********************************************
+
+
+   
     public int soldierland;
 
     public int score;
     public int highScore;
-    public List<GameObject> mainGameObject;
+  
 
     private void Awake()
     {
