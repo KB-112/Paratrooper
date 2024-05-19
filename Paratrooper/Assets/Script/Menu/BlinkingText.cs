@@ -19,7 +19,7 @@ public class BlinkingText : MonoBehaviour
             textToBlink.text = ""; 
             yield return new WaitForSeconds(blinkTime / 2); 
 
-            textToBlink.text = "How to Play ?"; 
+            textToBlink.text = "?"; 
             yield return new WaitForSeconds(blinkTime / 2); 
         }
     }
