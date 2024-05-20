@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     //[Next scene - Main Gameplay]
     public List<TextMeshProUGUI> mainGameText;
     public List<SpriteRenderer> mainGameSprite;
+    public Image[] mainGameplayBg = new Image[3];
+    public Sprite[] gameplaySprite = new Sprite[2];
 
     //[Next scene -  Instruction of The Game]
     public TextMeshProUGUI instruction;

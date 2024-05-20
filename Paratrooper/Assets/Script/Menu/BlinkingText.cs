@@ -6,6 +6,7 @@ public class BlinkingText : MonoBehaviour
 {
     public TextMeshProUGUI textToBlink;
     public float blinkTime = 0.5f;
+    [HideInInspector]public bool state = true;
 
     private void Start()
     {
@@ -14,7 +15,7 @@ public class BlinkingText : MonoBehaviour
 
     IEnumerator BlinkTextRoutine()
     {
-        while (true)
+        while (state)
         {
             textToBlink.text = ""; 
             yield return new WaitForSeconds(blinkTime / 2); 
@@ -22,5 +23,11 @@ public class BlinkingText : MonoBehaviour
             textToBlink.text = "How\n\nTo\n\nPlay\n ?"; 
             yield return new WaitForSeconds(blinkTime / 2); 
         }
+    }
+
+    public void TurnOffBlinking(bool turnoff)
+    {
+        state = turnoff;
+        StartCoroutine(BlinkTextRoutine());
     }
 }
