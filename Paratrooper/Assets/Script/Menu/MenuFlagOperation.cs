@@ -10,36 +10,43 @@ public class MenuFlagOperation : MonoBehaviour
 
     private void Start()
     {
-        alphaTextState = 0;
-        gameObjectSpriteState= false;
+        HideText(1);
+        MenuButtonInteraction(true);
+
+        GameManager.gameManager.OnGameStart += delegate { OnBtnPress(0, false); };
+        GameManager.gameManager.OnMenuScreen += delegate { OnBtnPress(1, true); }; ;
+        GameManager.gameManager.OnHowToPlay += delegate { OnBtnPress(0, false); };
     }
 
-    public void HideText()
+    public void HideText(int val)
     {
-       
         for (int i = 0; i < GameManager.gameManager.menuText.Length; i++)
         {
-            GameManager.gameManager.menuText[i].alpha = alphaTextState;
+            GameManager.gameManager.menuText[i].alpha = val;
         }
     }
 
-  public  void MenuButtonInteraction()
+    public void MenuButtonInteraction(bool state)
     {
-     
+
         for (int i = 0; i < GameManager.gameManager.menuButton.Length; i++)
         {
-            GameManager.gameManager.menuButton[i].interactable = gameObjectSpriteState;
-          
-
+            GameManager.gameManager.menuButton[i].interactable = state;
         }
     }
 
-    public void SetAlphaTextState(int newAlphaState , bool state)
+    void OnBtnPress(int val, bool state)
     {
-        alphaTextState = newAlphaState;
+        alphaTextState = val;
         gameObjectSpriteState = state;
-       HideText();
-        MenuButtonInteraction();
-       
+        HideText(val);
+        MenuButtonInteraction(state);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.gameManager.OnGameStart -= delegate { OnBtnPress(0, false); };
+        GameManager.gameManager.OnMenuScreen -= delegate { OnBtnPress(1, true); }; ;
+        GameManager.gameManager.OnHowToPlay -= delegate { OnBtnPress(0, false); };
     }
 }

@@ -11,6 +11,8 @@ public class BlinkingText : MonoBehaviour
     private void Start()
     {
         StartCoroutine(BlinkTextRoutine());
+        GameManager.gameManager.OnGameStart += delegate{ TurnOffBlinking(false); };
+    
     }
 
     IEnumerator BlinkTextRoutine()

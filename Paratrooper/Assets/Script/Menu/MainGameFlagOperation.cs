@@ -7,50 +7,32 @@ public class MainGameFlagOperation : MonoBehaviour
 
     private void Start()
     {
-        alphaTextState = 0;
-        HideText();
-        HideGameObjectSprite();
-    }
 
-    public void HideText()
-    {
-        for (int i = 0; i < GameManager.gameManager.mainGameText.Count; i++)
-        {
-            GameManager.gameManager.mainGameText[i].alpha = alphaTextState;
-        }
-    }
-
-    public void HideGameObjectSprite()
-    {
-        for (int i = 0; i < GameManager.gameManager.mainGameSprite.Count; i++)
-        {
-            Color color = GameManager.gameManager.mainGameSprite[i].color;
-            color.a = alphaTextState;
-            GameManager.gameManager.mainGameSprite[i].color = color;
-        }
-
-        if (alphaTextState == 1)
-        {
-
-            Color color2 = GameManager.gameManager.mainGameplayBg[1].color;
-            Color color1 = GameManager.gameManager.mainGameplayBg[2].color;
-            color2.a = 1 - alphaTextState;
-            color1.a = 1 - alphaTextState;
-            GameManager.gameManager.mainGameplayBg[1].color = color2;
-            GameManager.gameManager.mainGameplayBg[2].color = color1;
-
-            GameManager.gameManager.mainGameplayBg[0].sprite = GameManager.gameManager.gameplaySprite[0];
-
-            GameManager.gameManager.mainGameplayBg[0].rectTransform.sizeDelta = new Vector2(800f,500f);
-
-        }
+        SetAlphaTextState(0);
+        GameManager.gameManager.OnGameStart+= delegate { SetAlphaTextState(1); };
     }
 
 
     public void SetAlphaTextState(int newAlphaState)
     {
         alphaTextState = newAlphaState;
-        HideText();
-        HideGameObjectSprite();
+        GameManager.gameManager.mainGameText.ForEach(text => text.alpha = alphaTextState);
+        GameManager.gameManager.mainGameSprite.ForEach(sprite => sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, alphaTextState));
+        UpdateBackground();
+    }
+
+    private void UpdateBackground()
+    {
+        var inverseAlpha = 1 - alphaTextState;
+        for (int i = 1; i <= 2; i++)
+            GameManager.gameManager.mainGameplayBg[i].color = new Color(GameManager.gameManager.mainGameplayBg[i].color.r, GameManager.gameManager.mainGameplayBg[i].color.g, GameManager.gameManager.mainGameplayBg[i].color.b, inverseAlpha);
+
+        GameManager.gameManager.mainGameplayBg[0].sprite = GameManager.gameManager.gameplaySprite[alphaTextState == 1 ? 0 : 1];
+        GameManager.gameManager.mainGameplayBg[0].rectTransform.sizeDelta = new Vector2(alphaTextState == 1 ? 800f : 500f, 500f);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.gameManager.OnGameStart -= delegate { SetAlphaTextState(1); };
     }
 }

@@ -14,14 +14,10 @@ public class DeployEnemy : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(DeployHelicopter());
+       StopCoroutine(DeployHelicopter());
     }
 
-    private void Update()
-    {
-        
-      
-    }
+  
 
    
 
