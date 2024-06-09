@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 798cc7e85ecc50d4b8b272e71f4b174e, type: 3}
+  m_Name: SharedData
+  m_EditorClassIdentifier: 
+  info:
+  - storePosition:
+    - -5
+    - -5
+    - -5
+    dupCount: 3
+  - storePosition:
+    - -4
+    dupCount: 1
+  - storePosition:
+    - -3
+    - -3
+    dupCount: 2
+  - storePosition:
+    - 3
+    dupCount: 1
+  - storePosition:
+    - 5
+    dupCount: 1
+  - storePosition:
+    - 4
+    dupCount: 1

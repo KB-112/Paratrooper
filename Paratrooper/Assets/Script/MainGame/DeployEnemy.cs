@@ -6,20 +6,26 @@ using UnityEngine;
 public class DeployEnemy : MonoBehaviour
 {
     public List<GameObject> enemy;
-   
+
     public GameObject helicopterEnemy;
-    float[] helicopterDeployPosition = new float[4]; // Corrected size to 4
+    float[] helicopterDeployPosition = new float[4]; 
     int randPos = 0;
     Vector2 pos = new Vector2();
 
     private void Start()
     {
-       StopCoroutine(DeployHelicopter());
+       
+
+        GameManager.gameManager.OnGameStart += DeployHelicopterFunc;
     }
 
-  
+    void DeployHelicopterFunc()
+    {
+        StartCoroutine(DeployHelicopter());
+    }
 
-   
+
+
 
     IEnumerator DeployHelicopter()
     {
@@ -27,7 +33,7 @@ public class DeployEnemy : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             InitHelicopterDeploy();
-           Instantiate(helicopterEnemy, pos, Quaternion.identity);
+            Instantiate(helicopterEnemy, pos, Quaternion.identity);
 
 
             yield return new WaitForSeconds(1f);
@@ -44,5 +50,5 @@ public class DeployEnemy : MonoBehaviour
         pos = new Vector2(helicopterDeployPosition[randPos], transform.position.y);
     }
 
-   
+
 }
