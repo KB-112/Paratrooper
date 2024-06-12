@@ -18,16 +18,18 @@ public class SoldierDeploymentController : MonoBehaviour
     public GameObject prefab;
 
     public float posCount;
-   
- 
+
+    
     private void Start()
     {
         soldierLandingController.info.Clear();
+       
         for (int i = 0; i < 6; i++)
         {
             soldierLandingController.info.Add(new Info(new List<float>(), 0));
         }
         StartCoroutine(RandomizePosition());
+        soldierLandingController.stopInstantiate = state;
     }
    
     IEnumerator RandomizePosition()
@@ -35,7 +37,10 @@ public class SoldierDeploymentController : MonoBehaviour
         while (state)
         {
             int rand = UnityEngine.Random.Range(0, deployPosition.Count);
-           // Debug.Log(" pos :" + rand + " "+ "Deploy position: " + " "+ deployPosition[rand]);
+
+           
+
+
 
             Vector2 pos = new Vector2(deployPosition[rand], transform.position.y);
             Instantiate(prefab, pos, Quaternion.identity);
@@ -51,6 +56,7 @@ public class SoldierDeploymentController : MonoBehaviour
             if (soldierLandingController.info.Any(duplicate => duplicate.storePosition.Count == 3))
             {
                 state = false;
+                soldierLandingController.stopInstantiate = state;
                 Debug.Log("Attack base");
             }
            

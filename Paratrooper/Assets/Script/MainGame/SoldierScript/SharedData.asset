@@ -15,22 +15,19 @@ MonoBehaviour:
   info:
   - storePosition:
     - -5
-    - -5
-    - -5
-    dupCount: 3
-  - storePosition:
-    - -4
     dupCount: 1
-  - storePosition:
-    - -3
-    - -3
-    dupCount: 2
+  - storePosition: []
+    dupCount: 0
+  - storePosition: []
+    dupCount: 0
   - storePosition:
     - 3
-    dupCount: 1
-  - storePosition:
-    - 5
-    dupCount: 1
-  - storePosition:
-    - 4
-    dupCount: 1
+    - 3
+    - 3
+    dupCount: 3
+  - storePosition: []
+    dupCount: 0
+  - storePosition: []
+    dupCount: 0
+  stopInstantiate: 0
+  currentPosition: []
